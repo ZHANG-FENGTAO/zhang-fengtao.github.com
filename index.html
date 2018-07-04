@@ -319,19 +319,19 @@
       
         
           
-            <h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><p>####持久化<br>持久化方式：  </p>
+            <h3 id="Redis持久化"><a href="#Redis持久化" class="headerlink" title="Redis持久化"></a>Redis持久化</h3><h4 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h4><p>持久化方式：  </p>
 <ol>
 <li>快照（snapshotting） 只适用于那些即使丢失一部分数据也不会造成问题的应用程序。  </li>
 <li>AOF（只追加文件）将执行的写命令AOF文件的末尾。</li>
 </ol>
-<p>####快照<br>创建快照的方式：  </p>
+<h4 id="快照"><a href="#快照" class="headerlink" title="快照"></a>快照</h4><p>创建快照的方式：  </p>
 <ol>
 <li>客户端发送BGSAVE命令，Redis调用fork来创建一个子进程，然后子进程负责将快照写入硬盘，父进程继续处理请求。  </li>
 <li>配置文件设置save配置选项。执行BGSAVE命令。  </li>
 <li>Redis的SHUTDOWN命令，会执行SAVE命令。  <blockquote>
 <p>BGSASVE SAVE  SAVE 会阻塞Redis直至快照完成。<br>对于大数据：<br>当Redis只有几个GB的时候，使用snapshot没有问题，但是随着Redis占用的内存越来越多，BGSAVE在创建子进程耗费的时间会越来越多。导致Redis的性能越来越低直至不可用。<br>因此可以以考虑在业务不繁忙的时候手动执行save命令。  </p>
 </blockquote>
-####AOF持久化<br>AOF文件会因为不断地追加而变得异常庞大，此时需要BGREWRITEAOF来重写AOF文件。可以通过设置auto-aof-rewrite-min-size来自动执行。  <h4 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h4>对于有扩展平台以适应更高负载来说，复制是不可或缺的。</li>
+<h4 id="AOF持久化"><a href="#AOF持久化" class="headerlink" title="AOF持久化"></a>AOF持久化</h4>AOF文件会因为不断地追加而变得异常庞大，此时需要BGREWRITEAOF来重写AOF文件。可以通过设置auto-aof-rewrite-min-size来自动执行。  <h4 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h4>对于有扩展平台以适应更高负载来说，复制是不可或缺的。</li>
 </ol>
 
           
